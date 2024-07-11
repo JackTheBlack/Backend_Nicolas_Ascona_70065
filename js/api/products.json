@@ -22,20 +22,6 @@
     ]
   },
   {
-    "id": 1005,
-    "title": "Producto 3",
-    "description": "Descripción del producto 3",
-    "code": "PROD003",
-    "price": 150.75,
-    "status": true,
-    "stock": 30,
-    "category": "Categoría C",
-    "thumbnails": [
-      "ruta/imagen3a.jpg",
-      "ruta/imagen3b.jpg"
-    ]
-  },
-  {
     "id": 1006,
     "title": "Producto 4",
     "description": "Descripción del producto 4",

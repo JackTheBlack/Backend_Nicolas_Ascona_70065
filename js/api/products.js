@@ -49,7 +49,7 @@ router.get("/GET", (req, res) => {
 
 
 // Obtener un producto específico por ID
-router.get('/GET/:pid', (req, res) => {
+router.get('/:pid', (req, res) => {
     const products = getProducts();
     const productId = parseInt(req.params.pid, 10);
     const product = products.find(p => p.id === productId);
@@ -63,7 +63,7 @@ router.get('/GET/:pid', (req, res) => {
 
 
 ///////////////////////////////////// POST///////////////////////////
-router.post('/POST', (req, res) => {
+router.post('/', (req, res) => {
   const { title, description, code, price, status = true, stock, category, thumbnails = [] } = req.body;
 
   if (!title || !description || !code || !price || !stock || !category) {
@@ -109,7 +109,7 @@ router.post('/POST', (req, res) => {
 
 ////////////////////PUT////////////////////////////////////
 
-router.put('/PUT/:pid', (req, res) => {
+router.put('/:pid', (req, res) => {
     const products = getProducts();
     const productId = parseInt(req.params.pid, 10);
     const productIndex = products.findIndex(p => p.id === productId);

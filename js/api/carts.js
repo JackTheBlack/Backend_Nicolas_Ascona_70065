@@ -28,7 +28,7 @@ router.get('/:pid', (req, res) => {
     const cart = carts.find(p => p.id === cartId);
   
     if (cart) {
-      res.json(cart.productos);
+      res.json(cart.products);
     } else {
       res.status(404).send(`No se sogro encontrar el cart con ID:${cartId}`);
     }
@@ -37,7 +37,7 @@ router.get('/:pid', (req, res) => {
 ///////////////////////////// POST //////////////////////////////////////////////////////////
 
 /////Crea un carrito//////////////////////////////
-router.post("/POST", (req, res) => {
+router.post("/", (req, res) => {
     
     const { id,products = [] } = req.body;
 
