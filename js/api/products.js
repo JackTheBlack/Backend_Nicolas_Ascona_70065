@@ -94,7 +94,7 @@ router.post('/', (req, res) => {
 
 ////////////////////////////////DELETE////////////////////////////////
 
-  router.post('/DELETE/:pid', (req, res) => {
+  router.delete('/:pid', (req, res) => {
     const productId = parseInt(req.params.pid, 10);
 
     const success = deleteProduct(productId);
