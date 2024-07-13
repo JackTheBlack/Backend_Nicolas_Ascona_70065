@@ -2,6 +2,7 @@ const express = require("express")
 const fs=require('fs')
 const router = express.Router()
 
+
 const getCarts = () => {
     const data = fs.readFileSync("./api/carts.json", 'utf8');
     return JSON.parse(data);

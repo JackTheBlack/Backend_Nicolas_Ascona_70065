@@ -1,45 +1,37 @@
 const express = require("express")
 const fs=require('fs')
 const router = express.Router()
+const { getAllProducts,deleteProduct } = require('./utils/utils.js'); // Asegúrate de que la ruta a utils.js sea correcta
 
 
 
 
-
+/**
 const getProducts = () => {
   const data = fs.readFileSync("./api/products.json", 'utf8');
   return JSON.parse(data);
 };
 
 
-const deleteProduct = (productId) => {
-  let products = getProducts();
-  const newProducts = products.filter(product => product.id !== productId);
-  if (newProducts.length === products.length) {
-    return false; // No se encontró el producto
-  }
-  ////////////guardo el producto///////////////////
-  fs.writeFileSync("./api/products.JSON", JSON.stringify(newProducts, null, 2), 'utf8');
-  return true; // Se eliminó el producto
-};
 
-/**
+
 const generateId = () => {
   const products = getProducts();
   const id=products.length()+1001;
   return id;
-};*/
+};
 /////////////////generar id de manera automatica sin repetir///////////////
-const generateId = () => {
+/* const generateId = () => {
   const products = getProducts();
   const maxId = products.reduce((max, product) => Math.max(max, product.id), 0);
   return maxId + 1;
 };
-
+*/
 
 //   Obtener todos los productos
-router.get("/GET", (req, res) => {
-  const products=getProducts();
+router.get("/", (req, res) => {
+  console.log("ddsds")
+  const products=getAllProducts();
   res.json(products)
 })
 
@@ -50,7 +42,7 @@ router.get("/GET", (req, res) => {
 
 // Obtener un producto específico por ID
 router.get('/:pid', (req, res) => {
-    const products = getProducts();
+    const products = getAllProducts();
     const productId = parseInt(req.params.pid, 10);
     const product = products.find(p => p.id === productId);
   
@@ -64,12 +56,13 @@ router.get('/:pid', (req, res) => {
 
 ///////////////////////////////////// POST///////////////////////////
 router.post('/', (req, res) => {
+   console.log("estoy acaa")
   const { title, description, code, price, status = true, stock, category, thumbnails = [] } = req.body;
 
   if (!title || !description || !code || !price || !stock || !category) {
       return res.status(400).json({ error: 'Todos los campos son obligatorios, excepto thumbnails' });
   }
-
+  console.log("estoy acaa")
   const newProduct = {
       id: generateId(),
       title,
@@ -81,13 +74,14 @@ router.post('/', (req, res) => {
       category,
       thumbnails
   };
-    const products =getProducts();
-    
+    const products =getAllProducts();
+        
    // newProduct.id = products.length ? products[products.length - 1].id + 1 : 1;
     products.push(newProduct);
-  
+    
+
     fs.writeFileSync("./api/products.JSON", JSON.stringify(products, null, 2), 'utf8');
-   return res.status(201).json(newProduct);
+     return res.status(201).json(newProduct);
   });
 
 
@@ -110,7 +104,7 @@ router.post('/', (req, res) => {
 ////////////////////PUT////////////////////////////////////
 
 router.put('/:pid', (req, res) => {
-    const products = getProducts();
+    const products = getAllProducts();
     const productId = parseInt(req.params.pid, 10);
     const productIndex = products.findIndex(p => p.id === productId);
   

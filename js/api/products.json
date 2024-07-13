@@ -34,5 +34,19 @@
       "ruta/imagen4a.jpg",
       "ruta/imagen4b.jpg"
     ]
+  },
+  {
+    "id": 1007,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
   }
 ]
