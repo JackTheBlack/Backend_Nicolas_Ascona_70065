@@ -1,0 +1,99 @@
+[
+  {
+    "id": 1004,
+    "title": "Producto 1",
+    "description": "Descripción del producto 1",
+    "code": "PROD001",
+    "price": 100.5,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría A",
+    "thumbnails": [
+      "ruta/imagen1a.jpg",
+      "ruta/imagen1b.jpg"
+    ]
+  },
+  {
+    "id": 1007,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1008,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1010,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1012,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1014,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1015,
+    "title": "xxxx",
+    "description": "xxx",
+    "code": "A6DE5278",
+    "price": 3,
+    "status": true,
+    "stock": 1,
+    "category": "xxx",
+    "thumbnails": [
+      "xxx"
+    ]
+  }
+]
