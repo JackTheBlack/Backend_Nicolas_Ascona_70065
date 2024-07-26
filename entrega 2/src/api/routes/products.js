@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = express.Router();
-
+const app=express();
 // Obtener todos los productos
 router.get("/", (req, res) => {
   
@@ -66,9 +66,12 @@ router.post('/', (req, res) => {
   // newProduct.id = products.length ? products[products.length - 1].id + 1 : 1;
    products.push(newProduct);
    
-
+    // Emitir un evento a través de Socket.IO para actualizar la lista de productos en tiempo real
+   
    fs.writeFileSync("./src/api/products.JSON", JSON.stringify(products, null, 2), 'utf8');
-    return res.status(201).json(newProduct);
+   req.io.emit("newList", newProduct);
+
+   res.status(201).json(newProduct);
  });
 
 
@@ -80,45 +83,13 @@ router.delete('/:pid', (req, res) => {
   const success = deleteProduct(productId);
 
   if (success) {
+    req.io.emit("deleted", productId);
     res.status(200).send(`Producto con ID: ${productId} eliminado`);
   } else {
     res.status(404).send(`Producto con ID: ${productId} no encontrado`);
   }
 });
 
-
-
-
-
-///////////////////////////////////// POST///////////////////////////
-router.post('/', (req, res) => {
-  console.log("estoy acaa")
- const { title, description, code, price, status = true, stock, category, thumbnails = [] } = req.body;
-
- if (!title || !description || !code || !price || !stock || !category) {
-     return res.status(400).json({ error: 'Todos los campos son obligatorios, excepto thumbnails' });
- }
- console.log("estoy acaa")
- const newProduct = {
-     id: generateId(),
-     title,
-     description,
-     code,
-     price,
-     status,
-     stock,
-     category,
-     thumbnails
- };
-   const products =getAllProducts();
-       
-  // newProduct.id = products.length ? products[products.length - 1].id + 1 : 1;
-   products.push(newProduct);
-   
-
-   fs.writeFileSync("./src/api/products.JSON", JSON.stringify(products, null, 2), 'utf8');
-    return res.status(201).json(newProduct);
- });
 
 
 export default router;

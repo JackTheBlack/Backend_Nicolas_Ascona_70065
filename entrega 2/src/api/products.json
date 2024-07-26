@@ -14,48 +14,6 @@
     ]
   },
   {
-    "id": 1007,
-    "title": "Producto 5",
-    "description": "Descripción del producto 5",
-    "code": "PROD004",
-    "price": 50.25,
-    "status": true,
-    "stock": 47,
-    "category": "Categoría D",
-    "thumbnails": [
-      "ruta/imagen4a.jpg",
-      "ruta/imagen4b.jpg"
-    ]
-  },
-  {
-    "id": 1008,
-    "title": "Producto 5",
-    "description": "Descripción del producto 5",
-    "code": "PROD004",
-    "price": 50.25,
-    "status": true,
-    "stock": 47,
-    "category": "Categoría D",
-    "thumbnails": [
-      "ruta/imagen4a.jpg",
-      "ruta/imagen4b.jpg"
-    ]
-  },
-  {
-    "id": 1010,
-    "title": "Producto 5",
-    "description": "Descripción del producto 5",
-    "code": "PROD004",
-    "price": 50.25,
-    "status": true,
-    "stock": 47,
-    "category": "Categoría D",
-    "thumbnails": [
-      "ruta/imagen4a.jpg",
-      "ruta/imagen4b.jpg"
-    ]
-  },
-  {
     "id": 1012,
     "title": "Producto 5",
     "description": "Descripción del producto 5",
@@ -85,13 +43,69 @@
   },
   {
     "id": 1015,
-    "title": "xxxx",
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1016,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1017,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1018,
+    "title": "Producto 5",
+    "description": "Descripción del producto 5",
+    "code": "PROD004",
+    "price": 50.25,
+    "status": true,
+    "stock": 47,
+    "category": "Categoría D",
+    "thumbnails": [
+      "ruta/imagen4a.jpg",
+      "ruta/imagen4b.jpg"
+    ]
+  },
+  {
+    "id": 1019,
+    "title": "xx",
     "description": "xxx",
-    "code": "A6DE5278",
-    "price": 3,
+    "code": "xxx",
+    "price": 1,
     "status": true,
     "stock": 1,
-    "category": "xxx",
+    "category": "xxxx",
     "thumbnails": [
       "xxx"
     ]

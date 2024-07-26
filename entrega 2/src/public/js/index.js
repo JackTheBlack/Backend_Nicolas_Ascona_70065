@@ -43,9 +43,17 @@ addProductForm.addEventListener('click', ()=> {
             // Aquí puedes enviar la data a tu servidor o realizar cualquier otra acción necesaria
         });
 
+        socket.on("deleted",data=>{
+          const id=Number(data)
+          const productElement = document.getElementById(id);
+          if (productElement) {
+            productElement.remove();
+          }
+        })
+
+
 
         socket.on("newList",data=>{
-          console.log("golaaaa")
           const newProduct = document.createElement('li');
     newProduct.textContent = `${data.id} - $${data.price} `;
     
