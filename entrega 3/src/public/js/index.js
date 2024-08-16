@@ -1,7 +1,7 @@
 
 const socket = io()
 
-let user;
+
 let chatBox = document.getElementById("chatBox")
 let button =document.getElementById("deleteBtn");
 let btn=document.getElementById("deleteBtn");
@@ -11,7 +11,31 @@ let productsList = document.getElementById('productsList');
 //socket.emit('message', "Soy el mensaje enviados")
 
 
+
+
+
+//////////////////////ADD TO CART//////////////////////////////////////////
+
+
+productList.addEventListener('click', function(event) {
+  console.log("holaaa")
+  // Verificar si el clic fue en un botón con la clase 'deleteButton'
+  if (event.target && event.target.classList.contains('addToCart')) {
+   // Obtener el valor del botón (id del producto)
+   const productId = event.target.value;
+  
+   socket.emit("addToCrt",productId)
+}
+
+
+})
+
+
+
 ///////////////////////ADDD//////////////////////////////////////////
+
+
+
 
 addProductForm.addEventListener('click', ()=> {
             // Prevenir el envío del formulario
@@ -40,7 +64,8 @@ addProductForm.addEventListener('click', ()=> {
 
             console.log(productData);
             socket.emit("addProduct",productData);
-            // Aquí puedes enviar la data a tu servidor o realizar cualquier otra acción necesaria
+            
+            // Aquí puedes enviar la data a tu servidor o realizar cualquier otra acción necesari
         });
 
         socket.on("deleted",data=>{
@@ -58,6 +83,7 @@ addProductForm.addEventListener('click', ()=> {
     newProduct.textContent = `${data.id} - $${data.price} `;
     
     const deleteButton = document.createElement('button');
+    deleteButton.className="deleteButton";
     deleteButton.style.marginLeft = '5px';
     deleteButton.className = 'deleteButton';
     deleteButton.value = data.id;
@@ -80,16 +106,6 @@ productsList.addEventListener('click', function(event) {
 
  
 })
-
-/*
-btn.addEventListener("click",()=>{
-  let id=document.getElementById("productId");
-
-  socket.emit("boton",id.value)
-})
-*/
-/////////////////////// ADD PRODUCT///////////////////////////
-
 
 
 chatBox.addEventListener("keyup", evt => {
@@ -120,8 +136,3 @@ socket.on("messageLogs", data => {
 
 
 
-
-
-
-
-//logica para traer el contenido del input en el formulario

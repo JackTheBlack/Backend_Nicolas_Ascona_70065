@@ -1,13 +1,20 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import Product from "../models/products.model.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const getAllProducts = () => {
-  const data = fs.readFileSync(path.join(__dirname, '../products.json'), 'utf8');
-  return JSON.parse(data);
+ 
+
+ 
+ const data = fs.readFileSync(path.join(__dirname, '../products.json'), 'utf8');
+ 
+   return JSON.parse(data);
+
+
 };
 
 
@@ -15,8 +22,11 @@ const getAllProducts = () => {
 
 
 const generateId = (list) => {
+  console.log(list)
   const maxId = list.reduce((max, item) => Math.max(max, item.id), 0);
-  return maxId + 1;
+  console.log(maxId)
+    return maxId + 1;
+ 
 };
 
 const deleteProduct = (productId) => {

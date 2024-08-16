@@ -1,0 +1,87 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Productos en Tiempo Real</title>
+  <link rel="stylesheet" href="/style/style.css">
+ 
+</head>
+
+<header>
+
+<nav class="menu">
+  <ul class="menu">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Sobre nosotros</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+
+   <svg style="position:relative; left:75% ;padding-top:1rem " xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+</svg>
+
+</nav>
+
+    
+</header>
+<body>
+
+
+<div>
+    <div>
+        <select name="categoria" id="categoria">
+            {{#each category}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div>
+        <select name="categoria" id="categoria">
+            <option value="all">All</option>
+            <option value="available">Available</option>
+                <option value="not-available">Not abailable</option>
+        </select>
+    </div>
+  
+    
+</div>
+<div>
+                <h4>ordenar</h4>
+                 <div>
+        <select name="sort" id="sort">
+            <option value="asc">Menor precio</option>
+            <option value="asc">Mayor precio</option>
+                <option selected value="not-available"></option>
+        </select>
+    </div>
+
+                
+</div>
+<div>
+           <h1>Lista de Productos </h1>
+    <ul id="productsList">
+        {{#each payload}}
+            <li style="margin-bottom:15px" >
+                <div id style="display:block">
+                    <img src={{this.thumbnails}}   alt="Furry white cat sitting on a wall"></br>
+                     <strong>Title:</strong>   {{this.title}} -</br> 
+                        <strong>Price:</strong>   ${{this.price}} </br>   
+                    <strong>Description:</strong>  {{this.description}} - </br>
+                       <strong>Stock:</strong>        {{this.stock}} <br>
+                             <button type="button" id="addToCart" class="addToCartButton" id="{{this._id}}">Agregar al Carrito</button>
+                    </div>
+     </li> 
+
+               
+        {{/each}}
+    </ul>
+
+
+</div>
+
+</body>
+ 
+</html>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/home.js"></script>
+   

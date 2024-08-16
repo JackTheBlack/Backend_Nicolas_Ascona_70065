@@ -1,0 +1,39 @@
+body{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+li{
+    padding: 0.5em;
+    list-style-type: none;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+}
+
+div{
+     justify-content: center;
+    margin-bottom: 1em
+}
+
+
+li{
+     margin-bottom:15px;
+   
+}
+
+.menu{
+    display:flex;
+    background-color: rgb(241, 241, 43);
+}
+
+.deleteButton{
+    background-color: brown;
+    margin-left:5px;
+    border:14px;
+    border-color: blueviolet;
+    color:white;
+}

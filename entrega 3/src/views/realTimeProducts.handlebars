@@ -1,9 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Productos en Tiempo Real</title>
+  <link rel="stylesheet" href="/style/style.css">
+</head>
+
+<body>
 <div>
 
       <h1>Lista de Productos en Tiempo Real</h1>
     <ul id="productsList">
         {{#each products}}
-            <li id={{this.id}} style="margin-bottom:15px" >{{this.id}} - ${{this.price}}  <button style="margin-left:5px" class="deleteButton" value={{this.id}}>Eliminar </button></li> 
+            <li id={{this.id}} >{{this.title}} - ${{this.price}}  <button  class="deleteButton" value={{this.id}}>Eliminar </button></li> 
         {{/each}}
     </ul>
 
@@ -50,7 +60,8 @@
      
        
 </div>
-
+</body>
+</html>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

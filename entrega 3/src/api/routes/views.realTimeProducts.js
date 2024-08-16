@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { getAllProducts, deleteProduct, generateId } from '../utils/utils.js'; // Asegúrate de que la ruta a utils.js sea correcta
+import Products from '../models/products.model.js';
 
 const router = express.Router();
 
@@ -12,8 +13,9 @@ router.get("/", (req, res) => {
   res.json(products);
 });
 */
-router.get("/", (req, res) => {
-  const products = getAllProducts();
+router.get("/", async(req, res) => {
+  let products =await Products.find().lean();
+ 
   res.render('realTimeProducts',{products}); // Ajusta la ruta de la vista según tu configuración
 });
 
