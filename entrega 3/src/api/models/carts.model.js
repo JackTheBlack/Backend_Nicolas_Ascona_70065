@@ -5,11 +5,7 @@ const cartCollection="carts"
 
 // Esquema del carrito
 const cartSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        unique: true,
-        required: true
-    },
+ 
     products: [
         {
             product: { type: mongoose.Schema.Types.ObjectId, ref: "products" },

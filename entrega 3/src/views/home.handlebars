@@ -1,4 +1,4 @@
-<html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,6 @@
 
     
 </header>
-<body>
 
 
 <div>
@@ -36,39 +35,38 @@
         </select>
     </div>
     <div>
-        <select name="categoria" id="categoria">
-            <option value="all">All</option>
-            <option value="available">Available</option>
-                <option value="not-available">Not abailable</option>
-        </select>
+   <div>
+    <input type="checkbox" id="filterStock" name="filterStock" <%= stockFilter == 1 ? 'checked' : '' %> />
+
+     <label for="filterStock"> Mostrar solo productos con stock </label>
+</div>
     </div>
   
     
 </div>
 <div>
-                <h4>ordenar</h4>
-                 <div>
-        <select name="sort" id="sort">
-            <option value="asc">Menor precio</option>
-            <option value="asc">Mayor precio</option>
-                <option selected value="not-available"></option>
-        </select>
-    </div>
-
+  <label>Ordenar por:</label><br>
+  <input type="radio" id="sortAsc" name="sortOrder" value="asc">
+  <label for="sortAsc">Ascendente</label>
+  <input type="radio" id="sortDesc" name="sortOrder" value="desc">
+  <label for="sortDesc">Descendente</label>
+</div>
                 
 </div>
+  {{#if isValid}}
 <div>
            <h1>Lista de Productos </h1>
     <ul id="productsList">
         {{#each payload}}
             <li style="margin-bottom:15px" >
-                <div id style="display:block">
+                <div id={{this.id}} style="display:block">
                     <img src={{this.thumbnails}}   alt="Furry white cat sitting on a wall"></br>
                      <strong>Title:</strong>   {{this.title}} -</br> 
                         <strong>Price:</strong>   ${{this.price}} </br>   
                     <strong>Description:</strong>  {{this.description}} - </br>
-                       <strong>Stock:</strong>        {{this.stock}} <br>
-                             <button type="button" id="addToCart" class="addToCartButton" id="{{this._id}}">Agregar al Carrito</button>
+                       <strong id="stock">Stock:      {{this.stock}}</strong>    <br>
+                          
+                             <button  class="addButton" value={{this.id}}>Agregar </button>
                     </div>
      </li> 
 
@@ -79,9 +77,23 @@
 
 </div>
 
-</body>
- 
-</html>
+   <div >
+        {{#if hasPrevPage}}
+            <a href={{prevLink}}>&lt;&lt; Anterior</a>
+        {{/if}}
+            &nbsp;
+            Pagina {{page}} de {{totalPages}}
+            &nbsp;
+        {{#if hasNextPage}}
+            <a href={{nextLink}}>Siguiente &gt;&gt;</a>
+        {{/if}}
+    </div>
+    {{else}}
+    <h1>No hay productos para mostrar</h1>
+    {{/if}} 
+</div>
+
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/home.js"></script>
    

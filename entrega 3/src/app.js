@@ -11,7 +11,7 @@ import cartRouter from "./api/routes/carts.js";
 import realTimeProductsRouter from "./api/routes/views.realTimeProducts.js";
 import mongoose from "mongoose";
 import Products from './api/models/products.model.js';
-import Carts from './api/models/carts.model.js';
+import cartModel from './api/models/carts.model.js';
 
 
 const app = express();
@@ -66,23 +66,27 @@ socketServer.on('connection', socket => {
     ////////////////////////   add product to cart/////////////////////
 
 
-    socketServer.on("addToCart", async (productId) => {
+    socket.on("addToCart",  async (productId) => {
+     
+      
         try {
-            let cart = await Carts.findOne();
+            let cart = await cartModel.findOne();
             if (!cart) {
-                cart = new Carts();
+                cart = new cartModel();
             }
             
             const product = await Products.findById(productId);
             
-            const existingProduct = cart.products.find(p => p.product.toString() === productId);
+            const existingProduct = await cart.products.find(p => p.product.toString() === productId);
 
             if (existingProduct) {
                 if (product.stock > 0) {
                     existingProduct.quantity += 1;
                     product.stock -= 1;
+                   
                     await cart.save();
                     await product.save();
+                  
                     console.log("Cantidad del producto actualizada en el carrito");
                 } else {
                     console.log('Stock insuficiente');
@@ -91,12 +95,15 @@ socketServer.on('connection', socket => {
             } else {
                 cart.products.push({ product: productId, quantity: 1 });
                 product.stock -= 1;
-                await cart.save();
-                await product.save();
+                console.log("hasta aca llegue")
+                console.log(cart)
+              cart.save();
+               await  product.save();
+            
                 console.log("Producto agregado al carrito correctamente");
             }
-
-        
+           
+            socket.emit("updateStock", productId,product.stock);
         } catch (error) {
             console.error("Error al agregar el producto al carrito", error);
         }
@@ -125,10 +132,10 @@ socketServer.on('connection', socket => {
         socketServer.emit("newList", newProduct);
     });
 
-    socket.on("delete", data => {
+    socket.on("delete", async data => {
         const idp = Number(data);
         const success = deleteProduct(idp);
-        Products.deleteOne({id:idp})
+       await Products.deleteOne({id:idp})
         // socketServer.emit("newList", getAllProducts());
     });
 });

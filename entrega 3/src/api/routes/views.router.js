@@ -9,8 +9,13 @@ router.get('/', async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const page = parseInt(req.query.page) || 1;
   const sort = req.query.sort === 'asc' ? 'price' : req.query.sort === 'desc' ? '-price' : null;
-  const query = req.query.query ? { type: req.query.query } : {};
 
+  // Verifica si el filtro de stock está activado
+  const stockFilter = req.query.stockFilter === '1' ? { stock: { $gt: 0 } } : {};
+  const query = req.query.query ? { type: req.query.query, ...stockFilter } : stockFilter;
+
+ 
+  
   const options = {
       page: page,
       limit: limit,
@@ -26,7 +31,12 @@ router.get('/', async (req, res) => {
         hasNextPage: result.hasNextPage,
         prevLink: result.prevLink = result.hasPrevPage ? `http://localhost:8080/?page=${result.prevPage}` : null,
         nextLink: result.nextLink = result.hasNextPage ? `http://localhost:8080/?page=${result.nextPage}` : null,
-        isValid: result.docs.length > 0 });
+        isValid: result.docs.length > 0 ,
+        selectedSort: req.query.sort || '',   // Pasar el valor de sort seleccionado
+        stockFilterActive: req.query.stockFilter === '1' , // Pasar el estado del filtro de stock
+       
+        });
+        
   } catch (error) {
       console.error(error);
       res.status(500).send('Error al obtener productos');
