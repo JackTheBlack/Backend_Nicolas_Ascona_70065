@@ -1,6 +1,6 @@
 socket = io()
 
-
+let cartButton=document.getElementById("cartButton");
 const productsList= document.getElementById("productsList");
 let sortBox=document.getElementById('filterStock');
 
@@ -83,3 +83,10 @@ sortBox.addEventListener('change', function () {
      
  
   }
+
+
+  cartButton.addEventListener("click",function (event){
+
+window.location.href="/cart"
+  
+  })

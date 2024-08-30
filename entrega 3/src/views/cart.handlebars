@@ -27,11 +27,12 @@
 
 
 <div>
+  <div>
     <h1>Lista de Productos</h1>
     <div class="products-cart-container" id="productsList">
         {{#each products}}
             <div class="productCart" id="productList">
-                <img class="imgCart" src="{{this.image}}" alt="">
+                <img class="imgCart" src="{{this.thumbnails}}" alt="">
                 <p><strong>{{this.title}}</strong></p>
                 <p>{{this.description}}</p>
                 <p><strong>Cantidad: {{this.quantity}}</strong></p>
@@ -45,6 +46,7 @@
             {{/each}}
     </div>
     <h2>Total ${{this.total}} </h2>
+</div>
 </div>
 
 </body>

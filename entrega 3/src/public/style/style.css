@@ -29,7 +29,12 @@ li{
     display:flex;
     background-color: rgb(241, 241, 43);
 }
+.cartButton{
+    position: relative;
+    left: 70%;
+    cursor: pointer;
 
+}
 .deleteButton{
     background-color: brown;
     margin-left:5px;
@@ -37,3 +42,4 @@ li{
     border-color: blueviolet;
     color:white;
 }
+

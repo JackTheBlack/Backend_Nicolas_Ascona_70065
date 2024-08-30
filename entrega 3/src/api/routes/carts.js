@@ -5,6 +5,39 @@ import { getAllProducts, deleteProduct, generateId, getCarts } from '../utils/ut
 
 const router = express.Router();
 
+
+router.get('/', async (req, res) => {
+  const limit = parseInt(req.query.limit) || 10;
+  const page = parseInt(req.query.page) || 1;
+  const sort = req.query.sort === 'asc' ? 'price' : req.query.sort === 'desc' ? '-price' : null;
+
+  // Verifica si el filtro de stock está activado
+  const stockFilter = req.query.stockFilter === '1' ? { stock: { $gt: 0 } } : {};
+  const query = req.query.query ? { type: req.query.query, ...stockFilter } : stockFilter;
+
+ 
+  
+  const options = {
+      page: page,
+      limit: limit,
+      sort: sort,
+      lean: true, // Devuelve objetos JavaScript puros en lugar de documentos de Mongoose
+  };
+
+  try {
+      const result = await Products.paginate(query, options);
+      res.render('cart', { payload: result.docs, });
+        
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al obtener productos');
+  }
+});
+
+
+
+
+
 // Obtener un carrito específico por ID
 router.get('/:pid', (req, res) => {
   const carts = getCarts();
