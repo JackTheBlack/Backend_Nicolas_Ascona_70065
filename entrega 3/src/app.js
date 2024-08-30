@@ -21,14 +21,15 @@ const server = createServer(app);
 
 const user = "jack";
 const password = "1234";
-const dbName = "api_db";
+const dbName = "Comision_70065";
 const uri = `mongodb+srv://jack:${password}@cluster0.z70zv.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Comision_70065", {
-   
-  })
+  .mongoose.connect(
+    `mongodb+srv://jack:${password}@cluster0.z70zv.mongodb.net/${dbName}?retryWrites=true&w=majority`,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
   .then(() => console.log("conexion exitosa"))
   .catch((e) => console.log(e));
 
