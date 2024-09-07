@@ -11,7 +11,7 @@ import cartRouter from "./api/routes/carts.js";
 import realTimeProductsRouter from "./api/routes/views.realTimeProducts.js";
 import mongoose from "mongoose";
 import Products from './api/models/products.model.js';
-import cartModel from './api/models/carts.model.js';
+import Carts from './api/models/carts.model.js';
 
 
 const app = express();
@@ -67,49 +67,36 @@ socketServer.on('connection', socket => {
     ////////////////////////   add product to cart/////////////////////
 
 
-    socket.on("addToCart",  async (productId) => {
+    socket.on("addToCart",  async ({productId,cartId}) => {
+        let newStock;   
+     try{
+        const product = await Products.findById(productId);
      
-      
-        try {
-            let cart = await cartModel.findOne();
-            if (!cart) {
-                cart = new cartModel();
-            }
-            
-            const product = await Products.findById(productId);
-            
-            const existingProduct = await cart.products.find(p => p.product.toString() === productId);
-
-            if (existingProduct) {
-                if (product.stock > 0) {
-                    existingProduct.quantity += 1;
-                    product.stock -= 1;
-                   
-                    await cart.save();
-                    await product.save();
-                  
-                    console.log("Cantidad del producto actualizada en el carrito");
-                } else {
-                    console.log('Stock insuficiente');
-                    return
-                }
-            } else {
-                cart.products.push({ product: productId, quantity: 1 });
+        if (product) {
+            if (product.stock > 0) {
+         
+                newStock=product.stock-1;
                 product.stock -= 1;
-                console.log("hasta aca llegue")
-                console.log(cart)
-              cart.save();
-               await  product.save();
-            
-                console.log("Producto agregado al carrito correctamente");
-            }
            
-            socket.emit("updateStock", productId,product.stock);
-        } catch (error) {
-            console.error("Error al agregar el producto al carrito", error);
+                await product.save();
+              
+                console.log("Cantidad del producto actualizada en el carrito");
+            } else {
+                console.log('Stock insuficiente');
+             
+            }
         }
-    })
+       
+        socket.emit("updateStock", productId,product.stock);
+    } catch (error) {
+        console.error("Error al agregar el producto al carrito", error);
+    }
 
+    socketServer.emit("updateStock",{productId,newStock})
+})
+
+
+   
 
 /////////////////////// ADD PRODUCT/////////////////////////////////////////////////////////
 
@@ -139,6 +126,23 @@ socketServer.on('connection', socket => {
        await Products.deleteOne({id:idp})
         // socketServer.emit("newList", getAllProducts());
     });
+
+
+    socket.on("removeProduct", async ({quantity,productId,cartId})=>{
+        console.log("cuantity es",quantity)
+        try{
+            const product=await Products.findById(productId);
+            console.log(product.stock)
+            product.stock =Number(product.stock)+Number(quantity);
+            product.save();
+            console.log(cartId)
+        }catch(e){
+            alert("error al actualizar el stock",e);
+        }
+      
+
+    })
+
 });
 
 server.listen(PORT, () => console.log(`Escuchando en el puerto ${PORT}`));

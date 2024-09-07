@@ -1,9 +1,11 @@
+
 socket = io()
 
 let cartButton=document.getElementById("cartButton");
 const productsList= document.getElementById("productsList");
 let sortBox=document.getElementById('filterStock');
-
+const cartContainer = document.querySelector('.cart-container');
+const cartId = cartContainer.getAttribute("cart-id");
 
 
 
@@ -18,7 +20,9 @@ if (stockFilter === '1&') {
 }
 
 
-socket.on('updateStock', (productId, newStock) => {
+socket.on('updateStock', async (productId, newStock) => {
+  console.log("sdsdsds")
+
     // Encontrar el elemento del DOM correspondiente al producto que necesita actualización de stock
     const productDiv = document.getElementById(productId);
 
@@ -33,16 +37,28 @@ socket.on('updateStock', (productId, newStock) => {
     }
 });
 
-productsList.addEventListener('click', function (event) {
+productsList.addEventListener('click', async(event) =>{
   // Verificar si el clic fue en un botón con la clase 'deleteButton'
   
 
   if (event.target && event.target.classList.contains('addButton')) {
    // Obtener el valor del botón (id del producto)
    const productId = event.target.value;
-
    
-   socket.emit("addToCart",productId)}
+   
+
+    try{
+      const response = await fetch(`/carts/${cartId}/product/${productId}`, {
+        method: 'POST',
+      });
+    }catch(e){
+        console.log(e)
+    }
+
+
+
+    
+   socket.emit("addToCart",{productId,cartId})}
 })
 
 

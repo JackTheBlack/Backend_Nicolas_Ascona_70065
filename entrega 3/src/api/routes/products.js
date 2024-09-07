@@ -102,6 +102,19 @@ router.delete('/:pid', async(req, res) => {
  
 });
 
+/////////////PUT///////////////////////////////////////////
+router.put('/:pid', async (req, res) => {
+  const id = req.params.pid;
 
+  try {
+      const product = await productModel.findByIdAndUpdate(id, req.body)
+      if (!product) {
+          return res.status(404).json({message: 'Product not found'});
+      }
+      res.status(201).json({message: 'product updated'});
+  } catch (error) {
+      res.status(500).json({ message: 'Error updating product', error: error.message });
+  }
+});
 
 export default router;

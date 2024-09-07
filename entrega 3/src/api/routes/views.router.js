@@ -25,6 +25,8 @@ router.get('/', async (req, res) => {
   };
 
   try {
+      const cart= await Carts.findOne();
+    const cartId=cart._id
       const result = await Products.paginate(query, options);
       res.render('home', { payload: result.docs,  totalPages: result.totalPages,
         page: result.page,
@@ -35,7 +37,7 @@ router.get('/', async (req, res) => {
         isValid: result.docs.length > 0 ,
         selectedSort: req.query.sort || '',   // Pasar el valor de sort seleccionado
         stockFilterActive: req.query.stockFilter === '1' , // Pasar el estado del filtro de stock
-       
+        cartId
         });
         
   } catch (error) {
@@ -56,7 +58,7 @@ router.get("/cart", async (req, res) => {
         const productIds = cart.products.map(p => p.product);
 
         const products = await Products.find({ '_id': { $in: productIds } });
-
+        const cartId=cart._id;
         const productsDetails = products.map(product => {
             const cartItem = cart.products.find(p => p.product.toString() === product._id.toString());
             const totalPrice = product.price * cartItem.quantity;
@@ -70,7 +72,7 @@ router.get("/cart", async (req, res) => {
           
       const total = productsDetails.reduce((acc, product) => acc + (product.price * product.quantity), 0);
 
-        res.render('cart', { products: productsDetails, total });
+        res.render('cart', { cartId, products: productsDetails, total });
 
   } catch (err) {
       console.error(err)
